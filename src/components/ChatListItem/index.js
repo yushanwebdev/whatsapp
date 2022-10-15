@@ -1,4 +1,8 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const ChatListItem = ({ chat }) => {
   return (
@@ -14,7 +18,9 @@ const ChatListItem = ({ chat }) => {
           <Text style={styles.name} numberOfLines="1">
             {chat.user.name}
           </Text>
-          <Text style={styles.subTitle}>{chat.lastMessage.createdAt}</Text>
+          <Text style={styles.subTitle}>
+            {dayjs(chat.lastMessage.createdAt).fromNow(true)}
+          </Text>
         </View>
         <Text style={styles.subTitle} numberOfLines="2">
           {chat.lastMessage.text}
